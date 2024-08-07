@@ -24,26 +24,29 @@ This project visualizes radar data using the Processing environment. It reads da
 - **Arduino** (e.g., Arduino Uno)
 - **Breadboard**
 - **Jumper Wires**
+- **Buzzer**
 
 ### Wiring Instructions
 
 1. **Power Connections**:
-   - **Arduino to Breadboard**:
+   - **Arduino to Breadboard** :
      - Connect the **5V** pin of the Arduino to the positive rail on the breadboard.
      - Connect the **GND** pin of the Arduino to the negative rail on the breadboard.
 
-2. **Servo Motor Connections**:
-   - **Control Pin**: Connect the **yellow** jumper wire from the servo motor’s control pin to Arduino digital pin **12**.
+2. **Servo Motor Connections** :
+   - **Control Pin**: Connect the **yellow** jumper wire from the servo motor’s control pin to Arduino digital pin **7**.
    - **Power**: 
      - Connect the **red** wire from the servo motor to the positive rail on the breadboard (where Arduino 5V is connected).
      - Connect the **black** wire from the servo motor to the negative rail on the breadboard (where Arduino GND is connected).
 
 3. **Ultrasonic Sensor Connections**:
-   - **Trig Pin**: Connect the **yellow** jumper wire from the ultrasonic sensor’s Trig pin to Arduino digital pin **10**.
-   - **Echo Pin**: Connect the **yellow** jumper wire from the ultrasonic sensor’s Echo pin to Arduino digital pin **11**.
+   - **Trig Pin**: Connect the jumper wire from the ultrasonic sensor’s Trig pin to Arduino digital pin **8**.
+   - **Echo Pin**: Connect the jumper wire from the ultrasonic sensor’s Echo pin to Arduino digital pin **9**.
    - **Power**:
      - Connect the **red** wire from the ultrasonic sensor to the positive rail on the breadboard (where Arduino 5V is connected).
      - Connect the **black** wire from the ultrasonic sensor to the negative rail on the breadboard (where Arduino GND is connected).
+4. **Buzzer Connection** :
+   - Connected the buzzer positive terminal to digital pin **11** and negative terminal to ground.
 
 ## Arduino Code
 
