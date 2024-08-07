@@ -1,48 +1,67 @@
 #include <Servo.h>
 
-#define TRIG_PIN 8
-#define ECHO_PIN 9
+const int trigPin = 8;
+const int echoPin = 9;
+const int buzzerPin = 11;
+const int detectiondistance = 40;
 
 long duration;
 int distance;
-
-Servo myservo;
-
-int calculateDistance() {
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
-  duration = pulseIn(ECHO_PIN, HIGH);
-  distance = duration * 0.034 / 2;
-  return distance;
-}
+Servo myServo;
 
 void setup() {
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
-  myservo.attach(11);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(buzzerPin, OUTPUT);
+
   Serial.begin(9600);
+  myServo.attach(7);
 }
 
 void loop() {
   for (int i = 15; i <= 165; i++) {
-    myservo.write(i);
-    delay(15);
-    calculateDistance();
+    myServo.write(i);
+    delay(30);
+    distance = calculateDistance();
+
     Serial.print(i);
     Serial.print(",");
     Serial.print(distance);
-    Serial.println();
+    Serial.print(".");
+
+    if (distance < detectiondistance) {
+      digitalWrite(buzzerPin, HIGH);
+    } else {
+      digitalWrite(buzzerPin, LOW);
+    }
   }
-  for (int i = 165; i >= 15; i--) {
-    myservo.write(i);
-    delay(15);
-    calculateDistance();
+
+  for (int i = 165; i > 15; i--) {
+    myServo.write(i);
+    delay(30);
+    distance = calculateDistance();
+
     Serial.print(i);
     Serial.print(",");
     Serial.print(distance);
-    Serial.println();
+    Serial.print(".");
+
+    if (distance < detectiondistance) {
+      digitalWrite(buzzerPin, HIGH);
+    } else {
+      digitalWrite(buzzerPin, LOW);
+    }
   }
+}
+
+int calculateDistance() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+  return distance;
 }
